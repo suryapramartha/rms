@@ -125,7 +125,8 @@ public class SkillDaoImpl implements SkillDao
             int i = pstm.executeUpdate();
             if(i == 1) 
             {
-                return true;
+                deleteOnAssignedSkill(id);
+            	return true;
             }
         }
         catch (SQLException ex)
@@ -133,6 +134,21 @@ public class SkillDaoImpl implements SkillDao
             ex.printStackTrace();
         }
         return false;
+	}
+
+	private void deleteOnAssignedSkill(String id) 
+	{
+		try (Connection connection = DataSourceFactory.getConnection())
+        {
+	        String sql = "update empl_assigned_skill set skill_status=1 where skill_id=?";
+		 	PreparedStatement pstm = connection.prepareStatement(sql);
+		    pstm.setString(1,id);
+            pstm.executeUpdate();
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
 	}
 
 	public int getNewId(Connection con) throws SQLException 
