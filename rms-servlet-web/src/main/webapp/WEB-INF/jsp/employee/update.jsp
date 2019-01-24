@@ -29,23 +29,23 @@
 		<table border="1">
 			<tr>
 				<td>Employee ID</td>
-				<td><input type="text" disabled="true" value="<%=id%>" class="form-control"></input></td>
+				<td><input type="text" disabled="disabled" value="<%=id%>" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td>Employee Name</td>
-				<td><input type="text" name="emplNameForm" value="<%=name%>" required="true" class="form-control"></input></td>
+				<td><input type="text" name="emplNameForm" value="<%=name%>" required="required" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td>Employee Status</td>
-				<td><input type="text" disabled="true" value="<%=status%>" class="form-control"></input></td>
+				<td><input type="text" disabled="disabled" value="<%=status%>" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td>Employee Age</td>
-				<td><input type="number" name="emplAgeForm" min="0" value="<%=age%>" required="true" class="form-control"></input></td>
+				<td><input type="number" name="emplAgeForm" min="0" value="<%=age%>" required="required" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td>Employee Address</td>
-				<td><input type="text" name="emplAddressForm" value="<%=address%>" required="true" class="form-control" ></input></td>
+				<td><input type="text" name="emplAddressForm" value="<%=address%>" required="required" class="form-control" ></input></td>
 			</tr>
 		</table>
 		<input name="command" value="UPDATE" type="hidden"></input>

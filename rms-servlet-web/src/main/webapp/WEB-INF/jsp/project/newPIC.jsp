@@ -45,15 +45,16 @@
 			</tr>
 			<tr>
 				<td width="40%">Project Name</td>
-				<td><input type="text" name="projectNameForm" required="true" readonly="readonly" value="<%=name %>" maxlength="200" class="form-control"></input></td>
+				<td><input type="text" name="projectNameForm" required="required" readonly="readonly" value="<%=name %>" maxlength="200" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td width="40%">Project Start Date</td>
-				<td><input type="date" id="projectStartForm" name="projectStartForm" readonly="readonly" value="<%=start_date %>" required="true"  class="form-control"></input></td>
+				<td><input type="date" id="projectStartForm" name="projectStartForm" readonly="readonly" value="<%=start_date %>" required="required" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td width="40%">Project End Date</td>
-				<td><input type="date" id="projectEndForm" name="projectEndForm" readonly="readonly" value="<%=end_date %>" required="true"  class="form-control"></input></td>
+				<td><input type="date" id="projectEndForm" name="projectEndForm" readonly="readonly" value="<%=end_date %>" required="required" class="form-control"></input></td>
+				
 			</tr>
 			<tr>
 				<td width="40%">Project Requirement</td>

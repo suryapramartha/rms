@@ -40,16 +40,16 @@
 			</tr>
 			<tr>
 				<td>Project Name</td>
-				<td><input type="text" name="projectNameForm" value="<%=name%>" required="true" class="form-control" maxlength="50"></input></td>
+				<td><input type="text" name="projectNameForm" value="<%=name%>" required="required" class="form-control" maxlength="50"></input></td>
 			</tr>
 			<tr>
 				<td>Start Date</td>
-				<td><input type="date" id="projectStartForm" name="startDateForm" value="<%=start_date%>" min="<%=dat%>" required="true" class="form-control">
-					 </input></td>
+				<td><input type="date" id="projectStartForm" name="startDateForm" value="<%=start_date%>" min="<%=dat%>" required="required" class="form-control"></input>
+				</td>
 			</tr>
 			<tr>
 				<td>End Date</td>
-				<td><input type="date" id="projectEndForm" name="endDateForm"  value="<%=end_date%>" min="<%=dat%>"  required="true" class="form-control"></input></td>
+				<td><input type="date" id="projectEndForm" name="endDateForm"  value="<%=end_date%>" min="<%=dat%>"  required="required" class="form-control"></input></td>
 			</tr>
 			<tr>
 				<td>Status</td>
