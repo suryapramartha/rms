@@ -3,8 +3,12 @@ package com.mitrais.rms.dao;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import javax.sql.DataSource;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * This class provides MySQL datasource to be used to connect to database.
@@ -17,12 +21,27 @@ public class DataSourceFactory
     DataSourceFactory()
     {
         MysqlDataSource dataSource = new MysqlDataSource();
-        // TODO: make these database setting configurable by moving to properties file
-        dataSource.setDatabaseName("rmsdb");
-        dataSource.setServerName("192.168.99.100");
-        dataSource.setPort(3306);
-        dataSource.setUser("rms");
-        dataSource.setPassword("rms");
+        Properties prop = new Properties();
+        String propFileName = "database.properties";
+        InputStream is = null;
+        try
+        {
+			is = getClass().getClassLoader().getResourceAsStream(propFileName);
+			if (is != null) 
+			{
+				prop.load(is);
+			} else 
+			{
+				throw new FileNotFoundException("Property file '" + propFileName + "' not found in the classpath");
+			}
+    	}catch(IOException e) 
+        {
+    		e.printStackTrace();
+    		is = null;
+    	}
+        dataSource.setDatabaseName(prop.getProperty("dbname"));
+        dataSource.setUser(prop.getProperty("dbuser"));
+        dataSource.setPassword(prop.getProperty("dbpassword"));
         this.dataSource = dataSource;
     }
 
