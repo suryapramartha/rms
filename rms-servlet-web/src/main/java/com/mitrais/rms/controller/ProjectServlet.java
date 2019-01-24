@@ -96,7 +96,7 @@ public class ProjectServlet extends AbstractController
 				updateProject(request,response,path);
 				break;
 			case "CREATE":
-				createSkill(request,response,path);
+				createProject(request,response,path);
 				break;
 			case "CREATEPIC":
 				updateProjectPIC(request,response,path);
@@ -168,23 +168,28 @@ public class ProjectServlet extends AbstractController
 	    requestDispatcher.forward(request, response);
 	}
 	
-	private void createSkill(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException 
+	private void createProject(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException 
 	{
-		String nama = request.getParameter("projectNameForm");
-		String startDate = request.getParameter("projectStartForm");
-		String endDate = request.getParameter("projectEndForm");
 		String req = request.getParameter("ListSkill");
-		Date startDate1 =  Date.valueOf(startDate);
-		Date endDate1 =  Date.valueOf(endDate);
-		
-		Project ProjectObj = new Project(0, nama,startDate1, endDate1,0,req,0,"-");
-		ProjectDao projectDao = ProjectDaoImpl.getInstance();
-        Boolean sk = projectDao.save(ProjectObj);
-        if(sk) 
-        {
-        	getAllProject(request,response,path);
-        }
-		
+		if(req != null) {
+			String nama = request.getParameter("projectNameForm");
+			String startDate = request.getParameter("projectStartForm");
+			String endDate = request.getParameter("projectEndForm");
+			
+			Date startDate1 =  Date.valueOf(startDate);
+			Date endDate1 =  Date.valueOf(endDate);
+			
+			Project ProjectObj = new Project(0, nama,startDate1, endDate1,0,req,0,"-");
+			ProjectDao projectDao = ProjectDaoImpl.getInstance();
+	        Boolean sk = projectDao.save(ProjectObj);
+	        if(sk) 
+	        {
+	        	getAllProject(request,response,path);
+	        }	
+		}else
+		{
+			getAllProject(request, response, path);
+		}
 	}
 
 	private void updateProject(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException 
