@@ -30,48 +30,46 @@
 	}
 %>
 <body>
-<div class="container">
-<h1>New Competency Assignment Form</h1>
-	<form action="viewCompetency" method="POST">
-		<div class="form-group">
-		<table border="1" width="75%">
-			<tr>
-				<td width="40%">Employee ID</td>
-				<td><input type="text" name="emplIdForm" required="true" maxlength="5" class="form-control" value="<%=id %>" readonly="true"></input></td>
-			</tr>
-			<tr>
-				<td width="40%">Employee Name</td>
-				<td><input type="text" name="emplNameForm" required="true" maxlength="50" class="form-control" value="<%=name%>" readonly="true"></input></td>
-			</tr>
-			<tr>
-				<td width="40%">Competency Name</td>
-				<td><select name="ListSkill">
-					<c:forEach var="x" items="${listSkillAttribute}">	
-					<option value="${x.skillId}">${x.skillName}</option>	
-  					</c:forEach>
-  					</select>
-  					<c:choose>
-  							<c:when test="<%=isEmpty%>">
-    							<c:out value="${'List Skills not found or You already Assigned all available Skills !!'}"></c:out>
-  							</c:when>
-					</c:choose>
-				</td>
-			</tr>
-		</table>
-		<input name="command" value="CREATE_CMP" type="hidden"></input>	
-		
-		
-		<br><input type="submit" value="Create" class="btn btn-success" >
-		</div>
-	</form>
+	<div class="container">
+	<h1>New Competency Assignment Form</h1>
+		<form action="viewCompetency" method="POST">
+			<div class="form-group">
+				<table border="1" width="75%">
+					<tr>
+						<td width="40%">Employee ID</td>
+						<td><input type="text" name="emplIdForm" required="required" maxlength="5" class="form-control" value="<%=id %>" readonly="readonly"></input></td>
+					</tr>
+					<tr>
+						<td width="40%">Employee Name</td>
+						<td><input type="text" name="emplNameForm" required="required" maxlength="50" class="form-control" value="<%=name%>" readonly="readonly"></input></td>
+					</tr>
+					<tr>
+						<td width="40%">Competency Name</td>
+						<td>
+							<select name="ListSkill">
+								<c:forEach var="x" items="${listSkillAttribute}">	
+									<option value="${x.skillId}">${x.skillName}</option>	
+  								</c:forEach>
+  							</select>
+  							<c:choose>
+  								<c:when test="<%=isEmpty%>">
+    								<c:out value="${'List Skills not found or You already Assigned all available Skills !!'}"></c:out>
+  								</c:when>
+							</c:choose>
+						</td>
+					</tr>
+				</table>
+				<input name="command" value="CREATE_CMP" type="hidden"></input>	
+				<br><input type="submit" value="Create" class="btn btn-success" >
+			</div>
+		</form>
 		<c:url var="tempCancel" value="viewCompetency">
-			<c:param name="command" value="VIEW"></c:param>
-			<c:param name="employeeId" value="<%=id%>"></c:param>
+		<c:param name="command" value="VIEW"></c:param>
+		<c:param name="employeeId" value="<%=id%>"></c:param>
 		</c:url>
-	<a href="${tempCancel}">
- 	<button class="btn btn-primary">Cancel</button>
- </a> 
-</div>	
-
+		<a href="${tempCancel}">
+ 			<button class="btn btn-primary">Cancel</button>
+ 		</a> 
+	</div>	
 </body>
 </html>
