@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,6 +21,23 @@
 </head>
 
 <body>
+<%
+//allow access only if session exists
+String user = (String) request.getSession().getAttribute("user");
+
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null)
+{
+	for(Cookie cookie : cookies)
+	{
+		if(cookie.getName().equals("user")) userName = cookie.getValue();
+		if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+	}
+}
+System.out.println(userName);
+%>
     <div class="demo-layout-transparent mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--transparent">
         <div class="mdl-layout__header-row">
@@ -31,7 +50,15 @@
             <a class="mdl-navigation__link" href="project/list">Project List</a>
             <a class="mdl-navigation__link" href="employee/list">Employee List</a>
             <a class="mdl-navigation__link" href="skill/list">Competency List</a>
-            <a class="mdl-navigation__link" href="#">Users</a>
+            <c:choose>
+  				<c:when test="<%=userName==null%>">
+    				    <a class="mdl-navigation__link" href="login">Login</a>
+  				</c:when>
+  				<c:when test="<%=userName!=null%>">
+        			    <a class="mdl-navigation__link" href="logout">Hi <%=userName %>, Logout</a>
+  				</c:when>
+			</c:choose>
+           
           </nav>
         </div>
       </header>
@@ -41,7 +68,14 @@
           <a class="mdl-navigation__link" href="project/list">Project List</a>
           <a class="mdl-navigation__link" href="employee/list">Employee List</a>
           <a class="mdl-navigation__link" href="skill/list">Competency List</a>
-          <a class="mdl-navigation__link" href="#">Users</a>
+          <c:choose>
+  				<c:when test="<%=userName==null%>">
+    				    <a class="mdl-navigation__link" href="login">Login</a>
+  				</c:when>
+  				<c:when test="<%=userName!=null%>">
+        			    <a class="mdl-navigation__link" href="logout">Hi <%=userName %>, Logout</a>
+  				</c:when>
+			</c:choose>
         </nav>
       </div>
       <main class="mdl-layout__content">
