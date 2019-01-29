@@ -32,29 +32,25 @@ public class LoginServlet extends AbstractController
     {
     	String user = request.getParameter("username");
 		String pwd = request.getParameter("userpass");
-		if(userID.equals(user) && password.equals(pwd))
+		if(user == null || pwd == null) 
 		{
-			HttpSession oldSession = request.getSession(false);
-			if (oldSession != null) 
+				response.sendRedirect(request.getContextPath()+"/index.jsp");
+		}else 
+		{
+			if(userID.equals(user) && password.equals(pwd))
 			{
-               oldSession.invalidate();
+				HttpSession session = request.getSession(true);
+				session.setAttribute("user", "Admin");
+				session.setMaxInactiveInterval(3*6); //setting session to expired in 3 minutes
+				response.sendRedirect(request.getContextPath()+"/index.jsp");
+			}else
+			{
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginFailed.html");
+				PrintWriter out= response.getWriter();
+				out.println("<h4 align='center'><font color=red>Login Failed, Either user name or password is wrong.</font></h4>");
+				out.println("<h3 align='center'><a href='login'>Try Again</a></h3>");
+				rd.include(request, response);
 			}
-			HttpSession session = request.getSession(true);
-			session.setAttribute("user", "Admin");
-			session.setMaxInactiveInterval(3*60); //setting session to expired in 3 minutes
-			
-			Cookie userName = new Cookie("user", user);
-			userName.setMaxAge(3*60);
-			response.addCookie(userName);
-			response.sendRedirect(request.getContextPath()+"/index.jsp");
-			
-		}else
-		{
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginFailed.html");
-			PrintWriter out= response.getWriter();
-			out.println("<h4 align='center'><font color=red>Login Failed, Either user name or password is wrong.</font></h4>");
-			out.println("<h3 align='center'><a href='login'>Try Again</a></h3>");
-			rd.include(request, response);
 		}
     }
 }
