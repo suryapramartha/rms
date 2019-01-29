@@ -34,19 +34,19 @@ public class LoginServlet extends AbstractController
 		String pwd = request.getParameter("userpass");
 		if(userID.equals(user) && password.equals(pwd))
 		{
-			 HttpSession oldSession = request.getSession(false);
-			 if (oldSession != null) 
-			 {
-                oldSession.invalidate();
-			 }
+			HttpSession oldSession = request.getSession(false);
+			if (oldSession != null) 
+			{
+               oldSession.invalidate();
+			}
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", "Admin");
-			session.setMaxInactiveInterval(30*6); //setting session to expiry in 3 mins
+			session.setMaxInactiveInterval(3*60); //setting session to expired in 3 minutes
 			
 			Cookie userName = new Cookie("user", user);
-			userName.setMaxAge(30*6);
+			userName.setMaxAge(3*60);
 			response.addCookie(userName);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
 			
 		}else
 		{
