@@ -36,7 +36,6 @@ if(cookies !=null)
 		if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
 	}
 }
-System.out.println(userName);
 %>
     <div class="demo-layout-transparent mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--transparent">
@@ -51,11 +50,11 @@ System.out.println(userName);
             <a class="mdl-navigation__link" href="employee/list">Employee List</a>
             <a class="mdl-navigation__link" href="skill/list">Competency List</a>
             <c:choose>
-  				<c:when test="<%=userName==null%>">
+  				<c:when test="<%=user==null%>">
     				    <a class="mdl-navigation__link" href="login">Login</a>
   				</c:when>
-  				<c:when test="<%=userName!=null%>">
-        			    <a class="mdl-navigation__link" href="logout">Hi <%=userName %>, Logout</a>
+  				<c:when test="<%=user!=null%>">
+        			    <a class="mdl-navigation__link" href="logout">Hi <%=user %>, Logout</a>
   				</c:when>
 			</c:choose>
            

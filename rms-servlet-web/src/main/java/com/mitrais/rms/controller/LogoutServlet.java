@@ -30,15 +30,12 @@ public class LogoutServlet extends AbstractController {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Cookie[] cookies = request.getCookies();
-    	if(cookies != null){
-    	for(Cookie cookie : cookies)
+    	if (cookies != null)
     	{
-    		if(cookie.getName().equals("JSESSIONID"))
+    		for (Cookie cookie : cookies)
     		{
-    			System.out.println("JSESSIONID="+cookie.getValue());
-    		}
-    		cookie.setMaxAge(0);
-    		response.addCookie(cookie);
+    			cookie.setMaxAge(0);
+    			response.addCookie(cookie);
     		}
     	}
     	//invalidate the session if exists
@@ -47,10 +44,8 @@ public class LogoutServlet extends AbstractController {
     	{
             session.invalidate();
     	}
-    	//no encoding because we have invalidated the session
     	response.sendRedirect("index.jsp");
-    }
-	
+    }	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
